@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  sensor1:
+    build: .
+    environment:
+      - SENSOR_NAME=sensor1
+    networks:
+      - sensors_network
+
+  sensor2:
+    build: .
+    environment:
+      - SENSOR_NAME=sensor2
+    networks:
+      - sensors_network
+
+  sensor3:
+    build: .
+    environment:
+      - SENSOR_NAME=sensor3
+    networks:
+      - sensors_network
+
+  sensor4:
+    build: .
+    environment:
+      - SENSOR_NAME=sensor4
+    networks:
+      - sensors_network
+
+  sensor5:
+    build: .
+    environment:
+      - SENSOR_NAME=sensor5
+    networks:
+      - sensors_network
+
+networks:
+  sensors_network:
+    driver: bridge
