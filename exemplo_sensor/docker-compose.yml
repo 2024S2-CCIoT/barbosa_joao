@@ -1,10 +1,10 @@
-version: '3.8'
-
 services:
   sensor1:
     build: .
     environment:
       - SENSOR_NAME=sensor1
+    env_file:
+      - .env
     networks:
       - sensors_network
 
@@ -12,6 +12,8 @@ services:
     build: .
     environment:
       - SENSOR_NAME=sensor2
+    env_file:
+      - .env  
     networks:
       - sensors_network
 
@@ -19,6 +21,8 @@ services:
     build: .
     environment:
       - SENSOR_NAME=sensor3
+    env_file:
+      - .env
     networks:
       - sensors_network
 
@@ -26,6 +30,8 @@ services:
     build: .
     environment:
       - SENSOR_NAME=sensor4
+    env_file:
+      - .env
     networks:
       - sensors_network
 
@@ -33,6 +39,8 @@ services:
     build: .
     environment:
       - SENSOR_NAME=sensor5
+    env_file:
+      - .env
     networks:
       - sensors_network
 

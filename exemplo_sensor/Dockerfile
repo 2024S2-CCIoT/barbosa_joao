@@ -1,13 +1,13 @@
-FROM python:3.11-slim
-
-RUN pip install pipenv
+FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY Pipfile Pipfile.lock ./
+RUN pip install pipenv
+
+COPY . .
 
 RUN pipenv install --deploy --ignore-pipfile
 
-COPY main.py ./
+ENV PYTHONPATH "${PYTHONPATH}:/app"
 
-CMD ["pipenv", "run", "python", "main.py"]
+CMD ["pipenv", "run", "python", "-u", "main.py"]
