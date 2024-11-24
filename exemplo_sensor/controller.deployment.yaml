@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller-kaniko
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: controller-kaniko
+  template:
+    metadata:
+      labels:
+        app: controller-kaniko
+    spec:
+      containers:
+        - name: kaniko
+          image: gcr.io/kaniko-project/executor:latest
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+          args:
+            - "--context=dir:///app"
+            - "--dockerfile=controller.Dockerfile"
+            - "--no-push"
+            - "--verbosity=debug"
+          volumeMounts:
+            - name: controller
+              mountPath: /controller
+          env:
+            - name: REDIS_HOST
+              value: redis-service
+      volumes:
+        - name: controller
+          configMap:
+            name: controller-config

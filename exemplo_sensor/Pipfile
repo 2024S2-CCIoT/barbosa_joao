@@ -7,8 +7,11 @@ name = "pypi"
 requests = "*"
 python-dotenv = "*"
 pymongo = {extras = ["srv"], version = "*"}
+cuid = "*"
+redis = "*"
 
 [dev-packages]
+black = "*"
 
 [requires]
 python_version = "3.12"

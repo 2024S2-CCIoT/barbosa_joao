@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: processor-kaniko
+spec:
+    containers:
+      - name: kaniko
+        image: gcr.io/kaniko-project/executor:latest
+        resources:
+          limits:
+            cpu: "0.5m"
+            memory: "512Mi"
+        args:
+          - "--context=dir:///app"
+          - "--dockerfile=processor.Dockerfile"
+          - "--no-push"
+          - "--verbosity=debug"
+        volumeMounts:
+          - name: processor
+            mountPath: /processor
+        env:
+          - name: REDIS_HOST
+            value: redis-service
+          - name: BATCH_SIZE
+            value: "10"
+    volumes:
+    - name: processor
+      emptyDir: {}
+        
